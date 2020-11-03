@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hugh.crm.dao.UserDao">
+    <select id="login" resultType="com.hugh.crm.pojo.Users">
+        select * from tbl_user where loginAct = #{loginAct} and loginPwd = #{loginPwd}
+    </select>
+
+    <select id="selectAllUsers" resultType="com.hugh.crm.pojo.Users">
+        select * from tbl_user
+    </select>
+
+    <insert id="insertUser">
+        insert into tbl_user values (#{username},#{password})
+    </insert>
+
+</mapper>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+
+  <filter>
+    <filter-name>controllerFilter</filter-name>
+    <filter-class>com.hugh.crm.filter.ControllerFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>controllerFilter</filter-name>
+    <url-pattern>*.do</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>handlerFilter</filter-name>
+    <filter-class>com.hugh.crm.filter.HandlerFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>handlerFilter</filter-name>
+    <url-pattern>*.do</url-pattern>
+    <url-pattern>*.jsp</url-pattern>
+  </filter-mapping>
+
+
+
+  <!--使用Tomcat的默认Servlet处理静态资源访问的问题-->
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.js</url-pattern>
+    <url-pattern>*.css</url-pattern>
+    <url-pattern>*.png</url-pattern>
+    <url-pattern>*.ico</url-pattern>
+    <url-pattern>*.html</url-pattern>
+    <url-pattern>*.jpg</url-pattern>
+    <url-pattern>*.woff</url-pattern>
+    <url-pattern>*.ttf</url-pattern>
+  </servlet-mapping>
+
+
+
+
+  <!--中央调度器-->
+  <servlet>
+    <servlet-name>DispatcherServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!--SpringMVC的监听器-->
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:springmvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DispatcherServlet</servlet-name>
+    <!--注意这里设置为/时会导致的问题——js资源文件访问问题-->
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+
+  <!--
+        将POST请求转化为DELETE或者是PUT
+        要用_method指定真正的请求参数  _method:"DELETE"
+-->
+  <filter>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+  <servlet>
+    <servlet-name>userController</servlet-name>
+    <servlet-class>com.hugh.crm.controller.UserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>userController</servlet-name>
+    <url-pattern>/user/login.do</url-pattern>
+  </servlet-mapping>
+
+
+
+  <!--Spring的监听器-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+
+
+</web-app>
