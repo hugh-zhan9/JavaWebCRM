@@ -182,7 +182,7 @@
 			<div style="position: relative; width: 34%; height: 50%; left: 66%; top: -200%">
 				数据管理
 				<br><br>
-				<a href="dictionary/index.jsp">数据字典表</a>
+				<a href="settings/dictionary/index.jsp">数据字典表</a>
 				<br>
 				<a href="javascript:void(0);">导入</a>
 				<br>

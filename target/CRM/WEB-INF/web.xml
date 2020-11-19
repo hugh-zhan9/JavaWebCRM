@@ -8,6 +8,10 @@
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
 
+  <listener>
+    <listener-class>com.hugh.crm.listener.CrmApplicationListener</listener-class>
+  </listener>
+  
   <filter>
     <filter-name>controllerFilter</filter-name>
     <filter-class>com.hugh.crm.filter.ControllerFilter</filter-class>
@@ -57,7 +61,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>DispatcherServlet</servlet-name>
-    <!--注意这里设置为/时会导致的问题——js资源文件访问问题-->
+    <!--注意这里设置为/时会导致的问题——js/jpg资源文件访问问题-->
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 

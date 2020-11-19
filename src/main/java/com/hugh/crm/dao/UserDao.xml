@@ -14,5 +14,4 @@
     <insert id="insertUser">
         insert into tbl_user values (#{username},#{password})
     </insert>
-
 </mapper>

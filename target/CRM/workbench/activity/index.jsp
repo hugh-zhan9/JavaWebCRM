@@ -150,6 +150,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 		pageList(1,5);
 
+
 		// 为全选的复选框绑定事件
 		$("#checkAllBtn").click(function () {
 			$(".checkBox").prop("checked",this.checked);
@@ -204,7 +205,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		$("#updateBtn").click(function () {
 			var $userChecked = $(".checkBox:checked");
 			if ($userChecked.size()==0){
-				alert("请选择需要删除的对象")
+				alert("请选择需要修改的对象")
 			}else {
 				if ($userChecked.size()!=1) {
 					alert("每次只能修改一个对象")
@@ -258,6 +259,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				"startDate":$.trim($("#edit-startTime").val()),
 				"endDate":$.trim($("#edit-endTime").val()),
 				"cost":$.trim($("#edit-cost").val()),
+				"description":$.trim($("#edit-describe").val()),
 				"editBy":name
 			})
 			if(confirm("确定修改吗？")){

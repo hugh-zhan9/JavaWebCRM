@@ -8,6 +8,10 @@
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
 
+  <listener>
+    <listener-class>com.hugh.crm.listener.CrmApplicationListener</listener-class>
+  </listener>
+  
   <filter>
     <filter-name>controllerFilter</filter-name>
     <filter-class>com.hugh.crm.filter.ControllerFilter</filter-class>

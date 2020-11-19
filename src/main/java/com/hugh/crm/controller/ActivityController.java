@@ -1,16 +1,13 @@
 package com.hugh.crm.controller;
 
-import com.hugh.crm.pojo.Activity;
-import com.hugh.crm.pojo.ListResult;
-import com.hugh.crm.pojo.PageListSearch;
-import com.hugh.crm.pojo.Users;
+import com.hugh.crm.pojo.*;
+import com.hugh.crm.service.ActivityRemarkService;
 import com.hugh.crm.service.ActivityService;
 import com.hugh.crm.service.UserService;
 import com.hugh.crm.service.impl.UserServiceImpl;
 import com.hugh.crm.util.DateTimeUtil;
 import com.hugh.crm.util.PrintJson;
 import com.hugh.crm.util.UUIDUtil;
-import javafx.scene.chart.ValueAxis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +23,8 @@ import java.util.Map;
 public class ActivityController {
     @Autowired
     ActivityService activityService;
+    @Autowired
+    ActivityRemarkService activityRemarkService;
 
     @RequestMapping(value = "/activity/activities.do", method = RequestMethod.GET)
     public void queryActivity(HttpServletResponse response){
@@ -99,7 +98,6 @@ public class ActivityController {
         String id = request.getParameter("id");
         try {
             Activity activity = activityService.getActivityById(id);
-            System.out.println(activity);
             PrintJson.printJsonObj(response,activity);
         }catch (Exception e){
             e.printStackTrace();
@@ -125,4 +123,44 @@ public class ActivityController {
         request.getRequestDispatcher("/workbench/activity/detail.jsp").forward(request,response);
         //return "forward:workbench/activity/detail";
     }
+
+    @GetMapping("activity/remark.do")
+    public void queryActivityRemark(HttpServletRequest request, HttpServletResponse response){
+        /*
+            ActivityRemarkService activityRemarkService = new ActivityRemarkServiceImpl();
+            这里会导致Service层出现Dao注入为null异常
+         */
+        List<ActivityRemark> activityRemarks = activityRemarkService.getActivityRemarkById(request.getParameter("activityId"));
+        PrintJson.printJsonObj(response,activityRemarks);
+    }
+
+    @GetMapping("activity/saveRemark.do")
+    public void saveActivityRemark(HttpServletRequest request, HttpServletResponse response){
+        Users user = (Users) request.getSession().getAttribute("user");
+        ActivityRemark activityRemark = new ActivityRemark();
+        String noteContent = request.getParameter("noteContent");
+        String activityId = request.getParameter("activityId");
+        String id = UUIDUtil.getUUID();
+
+        activityRemark.setId(id);
+        activityRemark.setNoteContent(noteContent);
+        activityRemark.setActivityId(activityId);
+        activityRemark.setCreateTime(DateTimeUtil.getSysTime());
+        activityRemark.setCreateBy(user.getName());
+        activityRemark.setEditFlag("0");
+        Boolean flag = activityRemarkService.saveNoteContent(activityRemark);
+        // 返回结果
+        ActivityRemark ar = new ActivityRemark();
+        Map<String,Object> map = new HashMap();
+        map.put("success",flag);
+        map.put("ar",activityRemark);
+        PrintJson.printJsonObj(response,map);
+    }
+
+    @GetMapping("activity/detailDelte.do")
+    public void deleteActivityAndRemark(HttpServletResponse response,HttpServletRequest request){
+        Boolean flag = activityRemarkService.deleteActivityAndRemark(request.getParameter("activityId"));
+        PrintJson.printJsonFlag(response,flag);
+    }
+
 }

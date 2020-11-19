@@ -14,7 +14,7 @@ public class MD5Util {
 			// 把每一个byte 做一个与运算 0xff;
 			for (byte b : result) {
 				// 与运算
-				int number = b & 0xff;// 加盐
+				int number = b & 0xff;// 加严格
 				String str = Integer.toHexString(number);
 				if (str.length() == 1) {
 					buffer.append("0");

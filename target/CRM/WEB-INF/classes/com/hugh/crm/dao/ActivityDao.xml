@@ -9,7 +9,7 @@
         insert into tbl_activity
         (id, owner,name,startDate,endDate,cost,description,createTime,createBy)
         values
-        (#{id}, #{owner}, #{name}, #{startDate},#{endDate}, #{cost}, #{description},#{createTime}, #{createBy})
+        (#{id}, #{owner}, #{name}, #{startDate}, #{endDate}, #{cost}, #{description}, #{createTime}, #{createBy})
     </insert>
 
     <update id="updateActivity">
