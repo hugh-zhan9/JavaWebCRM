@@ -7,6 +7,17 @@ public class DicValue {
     private String orderNo;
     private String typeCode;
 
+    public DicValue() {
+    }
+
+    public DicValue(String id, String value, String text, String orderNo, String typeCode) {
+        this.id = id;
+        this.value = value;
+        this.text = text;
+        this.orderNo = orderNo;
+        this.typeCode = typeCode;
+    }
+
     public String getId() {
         return id;
     }
@@ -45,5 +56,16 @@ public class DicValue {
 
     public void setTypeCode(String typeCode) {
         this.typeCode = typeCode;
+    }
+
+    @Override
+    public String toString() {
+        return "DicValue{" +
+                "id='" + id + '\'' +
+                ", value='" + value + '\'' +
+                ", text='" + text + '\'' +
+                ", orderNo='" + orderNo + '\'' +
+                ", typeCode='" + typeCode + '\'' +
+                '}';
     }
 }

@@ -33,6 +33,7 @@ public class DicServiceImpl implements DicService {
         List<DicType> dicTypeList = dicTypeDao.getAllDicType();
         for(DicType dicType : dicTypeList){
             String typeCode = dicType.getCode();
+            // 取出的是内存值
             dicMap.put(typeCode,dicValueDao.getValueByTypeCode(typeCode));
         }
         return dicMap;

@@ -19,4 +19,8 @@ public interface ActivityService {
     Integer updateActivity(Activity activity);
 
     Activity getById(String id);
+
+    List<Activity> getAllActivity();
+
+    List<Activity> getActivityByWord(String queryDate);
 }

@@ -28,4 +28,21 @@ public class DicType {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public DicType(){}
+
+    public DicType(String code, String name, String description) {
+        this.code = code;
+        this.name = name;
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "DicType{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

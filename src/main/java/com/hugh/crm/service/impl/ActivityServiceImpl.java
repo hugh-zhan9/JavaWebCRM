@@ -3,6 +3,7 @@ package com.hugh.crm.service.impl;
 import com.hugh.crm.dao.ActivityDao;
 import com.hugh.crm.dao.ActivityRemarkDao;
 import com.hugh.crm.pojo.Activity;
+import com.hugh.crm.pojo.ClueActivityRelation;
 import com.hugh.crm.pojo.ListResult;
 import com.hugh.crm.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -93,5 +95,31 @@ public class ActivityServiceImpl implements ActivityService {
     public Activity getById(String id){
         Activity activity = activityDao.getById(id);
         return activity;
+    }
+
+    @Override
+    public List<Activity> getAllActivity() {
+        List<Activity> activities = activityDao.getAllActivity();
+        return activities;
+    }
+
+    @Override
+    public List<Activity> getActivityByWord(String queryDate) {
+        /* 使用两条SQL语句
+        List<Activity> activities = activityDao.getActivityListByName(queryDate);
+        List<ClueActivityRelation> clueActivityRelations = activityDao.getActivityListBond();
+        for (ClueActivityRelation a : clueActivityRelations){
+
+            // 这里会出错, 我把上一个删掉之后，找不到标记了
+            for (Activity b : activities){
+                if (b.getId().equals(a.getActivityId()))
+                activities.remove(b);
+            }
+        }
+        */
+
+        // 使用一条SQL语句
+        List<Activity> activities = activityDao.getActivityListByName(queryDate);
+        return activities;
     }
 }

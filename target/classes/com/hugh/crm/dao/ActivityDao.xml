@@ -68,7 +68,7 @@
     </select>
 
     <select id="getActivityById" resultType="com.hugh.crm.pojo.Activity">
-        select * from tbl_activity where id = #{id}
+        select a.id, a.startDate, a.endDate, u.name as owner from tbl_activity a join tbl_user u on a.owner = u.name where id = #{id}
     </select>
 
     <select id="getById" resultType="com.hugh.crm.pojo.Activity">
@@ -85,5 +85,14 @@
         a.editTime as editTime,
         a.editBy as editBy
         from tbl_activity as a join tbl_user as u on a.owner = u.id where a.id = #{id}
+    </select>
+
+
+    <select id="getAllActivity" resultType="com.hugh.crm.pojo.Activity">
+        select a.id, a.name, a.startDate, a.endDate, u.name as owner from tbl_activity a join tbl_user u on u.id = a.owner and a.id not in (select activityId from tbl_clue_activity_relation)
+    </select>
+    
+    <select id="getActivityListByName" resultType="com.hugh.crm.pojo.Activity">
+        select a.id ,a.name, a.startDate, a.endDate, u.name as owner from tbl_activity a join tbl_user u on u.id = a.owner where a.name like '%' #{name} '%' and a.id not in (select activityId from tbl_clue_activity_relation)
     </select>
 </mapper>

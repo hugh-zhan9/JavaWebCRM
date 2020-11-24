@@ -50,7 +50,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					var html = "";
 
 					$.each(data,function (i,n) {
-						html += "<option value='"+n.id+"'>"+n.name+"</option>";
+						html += "<option value='"+ n.id +"'>"+n.name+"</option>";
 					})
 					// 将数据加载到create-marketActivityOwner中
 					$("#create-marketActivityOwner").html(html);
@@ -74,6 +74,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				"cost":$.trim($("#create-cost").val()),
 				"description":$.trim($("#create-describe").val())
 			});
+
 			$.ajax({
 				url:"activity/activities.do",
 				data:jsonData1,
@@ -153,7 +154,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 		// 为全选的复选框绑定事件
 		$("#checkAllBtn").click(function () {
-			$(".checkBox").prop("checked",this.checked);
+			$(".checkBox").prop("checked", this.checked);
 		})
 		// 让复选框来触发全选操作
 		/*
@@ -165,6 +166,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		 语法：
 		 	$(需要绑定元素的有效的外层元素).on("绑定事件的方式"，需要绑定的元素的jQuery对象，回调函数)
 		*/
+
+		// 复选框全选时触发全选框选择
 		$("#activity-information").on("click",$(".checkBox"),function () {
 			$("#checkAllBtn").prop("checked",$(".checkBox").length==$(".checkBox:checked").length)
 		})

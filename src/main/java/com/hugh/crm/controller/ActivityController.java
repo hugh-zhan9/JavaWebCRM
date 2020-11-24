@@ -34,7 +34,7 @@ public class ActivityController {
     }
 
     @RequestMapping(value = "/activity/activities.do", method = RequestMethod.POST)
-    public void saveActivity(@RequestBody Activity activity,HttpServletRequest request, HttpServletResponse response){
+    public void saveActivity(@RequestBody Activity activity, HttpServletRequest request, HttpServletResponse response){
         activity.setId(UUIDUtil.getUUID());
         activity.setCreateTime(DateTimeUtil.getSysTime());
         Users user = (Users) request.getSession().getAttribute("user");

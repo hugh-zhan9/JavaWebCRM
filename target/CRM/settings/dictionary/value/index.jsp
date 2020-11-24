@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
 %>
@@ -12,6 +13,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 
@@ -42,46 +44,76 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				</tr>
 			</thead>
 			<tbody>
+			<c:forEach items="${appellation}" var="a">
 				<tr class="active">
 					<td><input type="checkbox" /></td>
 					<td>1</td>
-					<td>m</td>
-					<td>男</td>
-					<td>1</td>
-					<td>sex</td>
+					<td>${a.value}</td>
+					<td>${a.text}</td>
+					<td>${a.orderNo}</td>
+					<td>appellation</td>
 				</tr>
-				<tr>
+			</c:forEach>
+			<c:forEach items="${clueState}" var="b">
+				<tr class="active">
 					<td><input type="checkbox" /></td>
 					<td>2</td>
-					<td>f</td>
-					<td>女</td>
-					<td>2</td>
-					<td>sex</td>
+					<td>${b.value}</td>
+					<td>${b.text}</td>
+					<td>${b.orderNo}</td>
+					<td>clueState</td>
 				</tr>
+			</c:forEach>
+			<c:forEach items="${returnPriority}" var="c">
 				<tr class="active">
 					<td><input type="checkbox" /></td>
 					<td>3</td>
-					<td>1</td>
-					<td>一级部门</td>
-					<td>1</td>
-					<td>orgType</td>
+					<td>${c.value}</td>
+					<td>${c.text}</td>
+					<td>${c.orderNo}</td>
+					<td>returnPriority</td>
 				</tr>
-				<tr>
+			</c:forEach>
+			<c:forEach items="${returnState}" var="e">
+				<tr class="active">
 					<td><input type="checkbox" /></td>
 					<td>4</td>
-					<td>2</td>
-					<td>二级部门</td>
-					<td>2</td>
-					<td>orgType</td>
+					<td>${e.value}</td>
+					<td>${e.text}</td>
+					<td>${e.orderNo}</td>
+					<td>returnState</td>
 				</tr>
+			</c:forEach>
+			<c:forEach items="${source}" var="f">
 				<tr class="active">
 					<td><input type="checkbox" /></td>
 					<td>5</td>
-					<td>3</td>
-					<td>三级部门</td>
-					<td>3</td>
-					<td>orgType</td>
+					<td>${f.value}</td>
+					<td>${f.text}</td>
+					<td>${f.orderNo}</td>
+					<td>source</td>
 				</tr>
+			</c:forEach>
+			<c:forEach items="${stage}" var="g">
+				<tr class="active">
+					<td><input type="checkbox" /></td>
+					<td>6</td>
+					<td>${g.value}</td>
+					<td>${g.text}</td>
+					<td>${g.orderNo}</td>
+					<td>stage</td>
+				</tr>
+			</c:forEach>
+			<c:forEach items="${transactionType}" var="h">
+				<tr class="active">
+					<td><input type="checkbox" /></td>
+					<td>7</td>
+					<td>${h.value}</td>
+					<td>${h.text}</td>
+					<td>${h.orderNo}</td>
+					<td>transactionType</td>
+				</tr>
+			</c:forEach>
 			</tbody>
 		</table>
 	</div>
