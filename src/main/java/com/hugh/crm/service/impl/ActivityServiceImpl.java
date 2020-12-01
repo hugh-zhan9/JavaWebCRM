@@ -3,7 +3,6 @@ package com.hugh.crm.service.impl;
 import com.hugh.crm.dao.ActivityDao;
 import com.hugh.crm.dao.ActivityRemarkDao;
 import com.hugh.crm.pojo.Activity;
-import com.hugh.crm.pojo.ClueActivityRelation;
 import com.hugh.crm.pojo.ListResult;
 import com.hugh.crm.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -120,6 +118,18 @@ public class ActivityServiceImpl implements ActivityService {
 
         // 使用一条SQL语句
         List<Activity> activities = activityDao.getActivityListByName(queryDate);
+        return activities;
+    }
+
+    @Override
+    public List<Activity> getAllBoundActivity(String clueId) {
+        List<Activity> activities = activityDao.getAllBoundActivity(clueId);
+        return activities;
+    }
+
+    @Override
+    public List<Activity> getBoundActivityByName(String name,String clueId) {
+        List<Activity> activities = activityDao.getBoundActivityByKey(name,clueId);
         return activities;
     }
 }

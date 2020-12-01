@@ -6,7 +6,6 @@ import com.hugh.crm.pojo.DicType;
 import com.hugh.crm.pojo.DicValue;
 import com.hugh.crm.service.DicService;
 import com.hugh.crm.util.MybatisUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

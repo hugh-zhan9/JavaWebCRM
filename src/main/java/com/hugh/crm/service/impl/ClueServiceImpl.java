@@ -1,9 +1,8 @@
 package com.hugh.crm.service.impl;
 
-import com.hugh.crm.dao.ClueActivityRelationDao;
-import com.hugh.crm.dao.ClueDao;
-import com.hugh.crm.dao.ClueRemarkDao;
+import com.hugh.crm.dao.*;
 import com.hugh.crm.pojo.Clue;
+import com.hugh.crm.pojo.Tran;
 import com.hugh.crm.service.ClueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +17,10 @@ public class ClueServiceImpl implements ClueService {
     ClueRemarkDao clueRemarkDao;
     @Autowired
     ClueActivityRelationDao clueActivityRelationDao;
+    @Autowired
+    TranDao tranDao;
+    @Autowired
+    ContactsDao contactsDao;
 
     @Override
     public Boolean createClue(Clue clue) {
@@ -40,5 +43,17 @@ public class ClueServiceImpl implements ClueService {
     public List<Clue> getAllClue() {
         List<Clue> clues = clueDao.getAllClue();
         return clues;
+    }
+
+    @Override
+    public Integer saveClueAsTran(Tran tran) {
+        Integer count = tranDao.saveTran(tran);
+        return count;
+    }
+
+    @Override
+    public Integer saveContactsActivity(String id, String contactId, String activityId) {
+        contactsDao.saveContactsActivity(id,contactId,activityId);
+        return null;
     }
 }

@@ -5,7 +5,6 @@ import com.hugh.crm.service.UserService;
 import com.hugh.crm.service.impl.UserServiceImpl;
 import com.hugh.crm.util.MD5Util;
 import com.hugh.crm.util.PrintJson;
-import com.hugh.crm.util.ServiceFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

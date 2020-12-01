@@ -4,13 +4,14 @@ public class Tran {
 	
 	private String id;
 	private String owner;
-	private String money;	//交易金额
-	private String name;	//交易名称
-	private String expectedDate;	//预计成交日期
+	private String money;
+	private String name;
+	private String expectedDate;
 	private String customerId;
-	private String stage;	//交易阶段
-	private String type;	//交易类型
-	private String source;	//交易来源
+	private String stage;
+	private String type;
+	private String percent;
+	private String source;
 	private String activityId;
 	private String contactsId;
 	private String createBy;
@@ -18,8 +19,8 @@ public class Tran {
 	private String editBy;
 	private String editTime;
 	private String description;
-	private String contactSummary;	//联系纪要
-	private String nextContactTime;	//下次联系时间
+	private String contactSummary;
+	private String nextContactTime;
 	
 	public String getId() {
 		return id;
@@ -129,8 +130,10 @@ public class Tran {
 	public void setNextContactTime(String nextContactTime) {
 		this.nextContactTime = nextContactTime;
 	}
-	
-	
-
-	
+	public String getPercent() {
+		return percent;
+	}
+	public void setPercent(String percent) {
+		this.percent = percent;
+	}
 }

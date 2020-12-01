@@ -1,7 +1,6 @@
 package com.hugh.crm.service;
 
 import com.hugh.crm.exception.LoginException;
-import com.hugh.crm.pojo.Activity;
 import com.hugh.crm.pojo.Users;
 
 import java.util.List;

@@ -14,7 +14,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
 
 <script type="text/javascript">
@@ -26,6 +26,25 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			//防止下拉菜单消失
 	        e.stopPropagation();
 	    });
+
+		$.ajax({
+			url:"customer/queryAllCustomer.do",
+			dataType:"json",
+			method:"get",
+			success:function (data) {
+				var html = "";
+				$.each(data, function(i,n) {
+					html+='<tr>'
+					html+='<td><input type="checkbox" value="'+n.id+'"/></td>'
+					html+='<td><a style="text-decoration: none; cursor: pointer;" href="customer/detail.do?id='+n.id+'">'+n.name+'</a></td>'
+					html+='<td>'+n.owner+'</td>'
+					html+='<td>'+n.phone+'</td>'
+					html+='<td>'+n.website+'</td>'
+					html+='</tr>'
+				})
+				$("#customerBody").html(html);
+			}
+		})
 		
 	});
 	
@@ -268,21 +287,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<td>公司网站</td>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.jsp';">动力节点</a></td>
-							<td>zhangsan</td>
-							<td>010-84846003</td>
-							<td>http://www.bjpowernode.com</td>
-						</tr>
-                        <tr class="active">
-                            <td><input type="checkbox" /></td>
-                            <td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.jsp';">动力节点</a></td>
-                            <td>zhangsan</td>
-                            <td>010-84846003</td>
-                            <td>http://www.bjpowernode.com</td>
-                        </tr>
+					<tbody id="customerBody">
+
 					</tbody>
 				</table>
 			</div>

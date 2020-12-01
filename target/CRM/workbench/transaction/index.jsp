@@ -20,8 +20,55 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 <script type="text/javascript">
 
 	$(function(){
-		
-		
+
+		// 获取所有交易
+		$.ajax({
+			url: "tran/tranAllContacts.do",
+			dataType: "json",
+			method: "get",
+			success: function (data) {
+				var html = "";
+				$.each(data, function (i, n) {
+					html += '<tr>';
+					html += '<td><input type="checkbox" value="'+n.id+'" /></td>';
+					html += '<td><a style="text-decoration: none; cursor: pointer;" href="tran/detail.do?id='+ n.id +'">'+ n.name +'</a></td>';
+					html += '<td>'+ n.customerId +'</td>';
+					html += '<td>'+ n.stage +'</td>';
+					html += '<td>'+ n.type +'</td>';
+					html += '<td>'+ n.owner +'</td>';
+					html += '<td>'+ n.source +'</td>';
+					html += '<td>'+ n.contactsId +'</td>';
+					html += '</tr>';
+				})
+				$("#showTran").html(html);
+			}
+		})
+
+		// 修改交易
+		$("#editTranBtn").click(function () {
+			var $checkbox = $(":checkbox:checked")
+			if ($checkbox.size()==0){
+				alert("请选择一个交易")
+			}else{
+				if ($checkbox.size()!=1){
+					alert("只能同时修改一个交易")
+				}else{
+					var data = $checkbox.val();
+					window.location.href="tran/editTranById.do?id="+data;
+					/*
+					$.ajax({
+						url:"tran/editTranById.do",
+						data:{"id":data},
+						dataType:"json",
+						method:"get",
+						success:function (data) {
+							//
+						}
+					})
+					*/
+				}
+			}
+		})
 		
 	});
 	
@@ -135,7 +182,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			<div class="btn-toolbar" role="toolbar" style="background-color: #F7F7F7; height: 50px; position: relative;top: 10px;">
 				<div class="btn-group" style="position: relative; top: 18%;">
 				  <button type="button" class="btn btn-primary" onclick="window.location.href='workbench/transaction/save.jsp';"><span class="glyphicon glyphicon-plus"></span> 创建</button>
-				  <button type="button" class="btn btn-default" onclick="window.location.href='edit.html';"><span class="glyphicon glyphicon-pencil"></span> 修改</button>
+				  <button type="button" class="btn btn-default" id="editTranBtn"><span class="glyphicon glyphicon-pencil"></span> 修改</button>
 				  <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> 删除</button>
 				</div>
 				
@@ -155,7 +202,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<td>联系人名称</td>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="showTran">
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='workbench/transaction/detail.jsp';">动力节点-交易01</a></td>

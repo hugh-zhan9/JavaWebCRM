@@ -4,12 +4,10 @@ import com.hugh.crm.dao.ActivityDao;
 import com.hugh.crm.dao.ActivityRemarkDao;
 import com.hugh.crm.pojo.ActivityRemark;
 import com.hugh.crm.service.ActivityRemarkService;
-import com.hugh.crm.util.MybatisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

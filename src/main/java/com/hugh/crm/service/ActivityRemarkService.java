@@ -1,7 +1,6 @@
 package com.hugh.crm.service;
 
 import com.hugh.crm.pojo.ActivityRemark;
-import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 

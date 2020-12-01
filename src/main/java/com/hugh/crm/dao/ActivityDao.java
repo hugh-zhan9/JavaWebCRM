@@ -1,6 +1,7 @@
 package com.hugh.crm.dao;
+
 import com.hugh.crm.pojo.Activity;
-import com.hugh.crm.pojo.ClueActivityRelation;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -24,4 +25,11 @@ public interface ActivityDao {
 
     List<Activity> getActivityListByName(String queryDate);
 
+    /*
+        浏览器报错：Parameter 'XXX' not found. Available parameters are [arg1, arg0, param1,...
+        解决方案:@Param注解，多变量MyBatis不知道怎么分配值。
+     */
+    List<Activity> getBoundActivityByKey(@Param("name") String name, @Param("clueId") String clueId);
+
+    List<Activity> getAllBoundActivity(String clueId);
 }

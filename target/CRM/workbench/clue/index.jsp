@@ -32,7 +32,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					var userid = "${user.id}";
 					var htmlOwner ="";
 					$.each(data,function (i,n) {
-						htmlOwner+="<option value='"+ n.name +"'>" +n.name +"</option>"
+						htmlOwner+="<option value='"+ n.id +"'>" +n.name +"</option>"
 					})
 					$("#create-clueOwner").val(userid);
 					$("#create-clueOwner").html(htmlOwner);
@@ -71,9 +71,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				contentType: "application/json",
 				success:function (data) {
 					if (data.success){
+						flash();
 						// 关闭模态窗口
 						$("#createClueModal").modal("hide")
-						flash();
 					}else{
 						alert("创建线索失败")
 					}
@@ -89,7 +89,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	function flash() {
 		$.ajax({
 			url:"clue/getAllClue.do",
-			data:"",
 			dataType:"json",
 			method:"get",
 			success:function (data) {

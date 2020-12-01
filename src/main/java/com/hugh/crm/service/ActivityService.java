@@ -2,7 +2,7 @@ package com.hugh.crm.service;
 
 import com.hugh.crm.pojo.Activity;
 import com.hugh.crm.pojo.ListResult;
-import com.hugh.crm.pojo.PageListSearch;
+
 
 import java.util.List;
 import java.util.Map;
@@ -23,4 +23,9 @@ public interface ActivityService {
     List<Activity> getAllActivity();
 
     List<Activity> getActivityByWord(String queryDate);
+
+    List<Activity> getBoundActivityByName(String name, String clueId);
+
+    List<Activity> getAllBoundActivity(String clueId);
+
 }

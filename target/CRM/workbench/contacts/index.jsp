@@ -14,8 +14,8 @@
 
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
 
 <script type="text/javascript">
 
@@ -26,6 +26,26 @@
 			//防止下拉菜单消失
 	        e.stopPropagation();
 	    });
+
+		$.ajax({
+			url:"contacts/queryAllContacts.do",
+			dataType:"json",
+			method:"get",
+			success:function (data) {
+				var html = "";
+				$.each(data, function(i,n) {
+					html+='<tr>'
+					html+='<td><input type="checkbox" value="'+n.id+'"/></td>'
+					html+='<td><a style="text-decoration: none; cursor: pointer;" href="contacts/detail.do?id='+n.id+'">'+n.fullname+'</a></td>'
+					html+='<td>'+n.customerId+'</td>'
+					html+='<td>'+n.owner+'</td>'
+					html+='<td>'+n.source+'</td>'
+					html+='<td>'+n.birth+'</td>'
+					html+='</tr>'
+				})
+				$("#showContactBody").html(html);
+			}
+		})
 		
 	});
 	
@@ -404,10 +424,11 @@
 							<td>生日</td>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="showContactBody">
+						<%--
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.jsp';">李四</a></td>
+							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='workbench/contacts/detail.jsp';">李四</a></td>
 							<td>动力节点</td>
 							<td>zhangsan</td>
 							<td>广告</td>
@@ -421,6 +442,7 @@
                             <td>广告</td>
                             <td>2000-10-10</td>
                         </tr>
+                        --%>
 					</tbody>
 				</table>
 			</div>

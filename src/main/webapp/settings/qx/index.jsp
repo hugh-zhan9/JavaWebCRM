@@ -38,7 +38,7 @@
 		});
 		
 		//展示市场活动页面
-		window.open("user/index.html","workareaFrame");
+		window.open("user/index.jsp","workareaFrame");
 		
 	});
 	

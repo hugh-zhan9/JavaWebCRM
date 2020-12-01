@@ -1,7 +1,8 @@
 package com.hugh.crm.service;
 
 import com.hugh.crm.pojo.Clue;
-import org.springframework.stereotype.Service;
+import com.hugh.crm.pojo.Tran;
+
 
 import java.util.List;
 
@@ -11,4 +12,8 @@ public interface ClueService {
     Clue getDetail(String id);
 
     List<Clue> getAllClue();
+
+    Integer saveClueAsTran(Tran tran);
+
+    Integer saveContactsActivity(String uuid, String contactId, String activityId);
 }

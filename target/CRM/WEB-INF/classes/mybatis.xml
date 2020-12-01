@@ -7,6 +7,11 @@
 <configuration>
 
     <properties resource="jdbc.properties"></properties>
+
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
     <!--
 		配置mybatis环境
 		default必须和某个environment的id值一样，告诉mybatis使用哪个数据库的链接信息，就会访问哪个数据库
@@ -28,6 +33,8 @@
             </dataSource>
         </environment>
     </environments>
+
+
     <mappers>
         <!--
 			告诉mybatis要执行的sql映射文件位置
@@ -39,4 +46,5 @@
         <mapper resource="com/hugh/crm/dao/ActivityDao.xml"/>
         <mapper resource="com/hugh/crm/dao/ActivityRemarkDao.xml"/>
     </mappers>
+
 </configuration>
