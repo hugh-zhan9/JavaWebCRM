@@ -34,9 +34,11 @@ values
         select t.id, t.owner, t.money, t.name, t.expectedDate, cu.name as customerId, t.stage, t.type, t.source, a.name as activityId, co.fullname as contactsId, t.createBy, t.createTime, t.editBy, t.editTime, t.description, t.contactSummary, t.nextContactTime, t.percent
         from tbl_tran t join tbl_customer cu on t.customerId = cu.id join tbl_contacts co on co.id = t.contactsId join tbl_activity a on t.activityId = a.id where t.id = #{id}
     </select>
-    
+
+    <!--内连接/外连接-->
     <select id="getTranEditById" resultType="com.hugh.crm.pojo.TranEdit">
         select t.id, t.owner, t.money, t.name, t.expectedDate, t.customerId ,cu.name as customerName, t.stage, t.type, t.source, t.activityId, a.name as activityName, t.contactsId, co.fullname as contactsName, t.createBy, t.createTime, t.editBy, t.editTime, t.description, t.contactSummary, t.nextContactTime, t.percent
-        from tbl_tran t join tbl_customer cu on t.customerId = cu.id join tbl_contacts co on co.id = t.contactsId join tbl_activity a on t.activityId = a.id where t.id = #{id}
+        from tbl_tran t left join tbl_customer cu on t.customerId = cu.id left join tbl_contacts co on co.id = t.contactsId join tbl_activity a on t.activityId = a.id where t.id = #{id}
     </select>
+
 </mapper>

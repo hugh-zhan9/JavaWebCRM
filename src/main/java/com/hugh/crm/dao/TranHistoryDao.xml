@@ -5,7 +5,11 @@
 <mapper namespace="com.hugh.crm.dao.TranHistoryDao">
 
     <insert id="addTranHistory">
-        insert into tbl_tran_history (id, stage, money, expectedDate, createTime, createBy,tranId) values (#{id}, #{stage}, #{money}, #{expectedDate}, #{createTime}, #{createBy}, #{tranId})
+        insert into tbl_tran_history (id, stage, money, percent, expectedDate, createTime, createBy,tranId,) values (#{id}, #{stage}, #{money}, #{percent}, #{expectedDate}, #{createTime}, #{createBy}, #{tranId})
     </insert>
+
+    <select id="getTranHistoryById" resultType="com.hugh.crm.pojo.TranHistory">
+        select * from tbl_tran_history where tranId = #{id} order by stage desc
+    </select>
 
 </mapper>

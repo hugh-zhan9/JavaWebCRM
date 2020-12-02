@@ -1,3 +1,4 @@
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
@@ -88,6 +89,59 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                         }
                     }, 100);
                 });
+
+		// 局部刷新获取阶段历史
+		$.ajax({
+			url:"tran/getTranHistoryById.do",
+			data:{"id":"${tran.id}"},
+			method:"get",
+			dataType:"json",
+			success:function (data) {
+				var html = "";
+				$.each(data,function (i,n) {
+					html+='<tr>'
+					html+='<td>'+n.stage+'</td>'
+					html+='<td>'+n.money+'</td>'
+					html+='<td>'+n.percent+'</td>'
+					html+='<td>'+n.expectedDate+'</td>'
+					html+='<td>'+n.createTime+'</td>'
+					html+='<td>'+n.createBy+'</td>'
+					html+='</tr>'
+				})
+				$("#tranHistoryBody").html(html);
+			}
+		})
+
+
+		// 获取当前的阶段图
+		/*  如何动态的对图表进行绘制呢?
+		var html = "阶段&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+		html += '<span class="glyphicon glyphicon-ok-circle mystage" data-toggle="popover" data-placement="bottom" data-content="资质审查" style="color: #90F790;"></span>'
+		html += '-----------'
+		html += '<span class="glyphicon glyphicon-ok-circle mystage" data-toggle="popover" data-placement="bottom" data-content="资质审查" style="color: #90F790;"></span>'
+		html += '-----------'
+		html += '<span class="glyphicon glyphicon-ok-circle mystage" data-toggle="popover" data-placement="bottom" data-content="需求分析" style="color: #90F790;"></span>'
+		html += '-----------'
+		html += '<span class="glyphicon glyphicon-ok-circle mystage" data-toggle="popover" data-placement="bottom" data-content="价值建议" style="color: #90F790;"></span>'
+		html += '-----------'
+		html += '<span class="glyphicon glyphicon-ok-circle mystage" data-toggle="popover" data-placement="bottom" data-content="确定决策者" style="color: #90F790;"></span>'
+		html += '-----------'
+		html += '<span class="glyphicon glyphicon-map-marker mystage" data-toggle="popover" data-placement="bottom" data-content="提案/报价" style="color: #90F790;"></span>'
+		html += '-----------'
+		html += '<span class="glyphicon glyphicon-record mystage" data-toggle="popover" data-placement="bottom" data-content="谈判/复审"></span>'
+		html += '-----------'
+		html += '<span class="glyphicon glyphicon-record mystage" data-toggle="popover" data-placement="bottom" data-content="成交"></span>'
+		html += '-----------'
+		html += '<span class="glyphicon glyphicon-record mystage" data-toggle="popover" data-placement="bottom" data-content="丢失的线索"></span>'
+		html += '-----------'
+		html += '<span class="glyphicon glyphicon-record mystage" data-toggle="popover" data-placement="bottom" data-content="因竞争丢失关闭"></span>'
+		html += '-----------'
+		html += '<span class="closingDate">${tran.expectedDate}</span>'
+		$("#stagePic").html(html);
+		*/
+		// 给对象添加属性
+		$("#test").addClass("glyphicon glyphicon-ok-circle ");
+
 	});
 	
 	
@@ -114,9 +168,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	</div>
 
 	<!-- 阶段状态 -->
-	<div style="position: relative; left: 40px; top: -50px;">
+	<div style="position: relative; left: 40px; top: -50px;" id="stagePic">
 		阶段&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<span class="glyphicon glyphicon-ok-circle mystage" data-toggle="popover" data-placement="bottom" data-content="资质审查" style="color: #90F790;"></span>
+		<span id="test" class="mystage" data-toggle="popover" data-placement="bottom" data-content="资质审查" style="color: #90F790;"></span>
 		-----------
 		<span class="glyphicon glyphicon-ok-circle mystage" data-toggle="popover" data-placement="bottom" data-content="需求分析" style="color: #90F790;"></span>
 		-----------
@@ -282,7 +336,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<td>创建人</td>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody  id="tranHistoryBody">
 						<tr>
 							<td>资质审查</td>
 							<td>5,000</td>

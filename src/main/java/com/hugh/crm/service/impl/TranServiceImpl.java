@@ -5,13 +5,10 @@ import com.hugh.crm.pojo.*;
 import com.hugh.crm.service.TranService;
 import com.hugh.crm.util.DateTimeUtil;
 import com.hugh.crm.util.UUIDUtil;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import org.omg.CORBA.TRANSACTION_MODE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -122,10 +119,15 @@ public class TranServiceImpl implements TranService {
         tranHistory.setExpectedDate(tran.getExpectedDate());
         tranHistory.setMoney(tran.getMoney());
         tranHistory.setStage(tran.getStage());
+        tranHistory.setPercent(tran.getPercent());
         tranHistoryDao.addTranHistory(tranHistory);
 
         return true;
     }
 
-
+    @Override
+    public List<TranHistory> getTranHistoryById(String id) {
+        List<TranHistory> tranHistories = tranHistoryDao.getTranHistoryById(id);
+        return tranHistories;
+    }
 }

@@ -136,4 +136,11 @@ public class TranController {
              */
         }
     }
+
+    @GetMapping("tran/getTranHistoryById.do")
+    public void getTranHistoryById(HttpServletRequest request, HttpServletResponse response){
+        String tranId = request.getParameter("id");
+        List<TranHistory> histories = tranService.getTranHistoryById(tranId);
+        PrintJson.printJsonObj(response, histories);
+    }
 }

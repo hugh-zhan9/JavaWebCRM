@@ -1,9 +1,6 @@
 package com.hugh.crm.service;
 
-import com.hugh.crm.pojo.Contacts;
-import com.hugh.crm.pojo.Customer;
-import com.hugh.crm.pojo.Tran;
-import com.hugh.crm.pojo.TranEdit;
+import com.hugh.crm.pojo.*;
 
 import java.util.List;
 
@@ -23,4 +20,6 @@ public interface TranService {
     List<String> getCustomerByContent(String query);
 
     Boolean saveTran(Tran tran, String customerName);
+
+    List<TranHistory> getTranHistoryById(String id);
 }

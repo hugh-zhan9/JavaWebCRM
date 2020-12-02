@@ -9,7 +9,15 @@ public class TranHistory {
 	private String createTime;
 	private String createBy;
 	private String tranId;
-	
+	private String percent;
+
+	public String getPercent() {
+		return percent;
+	}
+	public void setPercent(String percent) {
+		this.percent = percent;
+	}
+
 	public String getId() {
 		return id;
 	}
