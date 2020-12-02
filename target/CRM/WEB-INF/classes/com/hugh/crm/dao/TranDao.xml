@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hugh.crm.dao.TranDao">
+    
+    <insert id="saveTran">
+        insert into tbl_tran
+(id, owner, money, name, expectedDate, customerId, stage, type, source, activityId, contactsId, createBy, createTime, editBy, editTime, description, contactSummary, nextContactTime, percent)
+values
+(#{id}, #{owner}, #{money}, #{name},#{expectedDate}, #{customerId}, #{stage}, #{type}, #{source}, #{activityId}, #{contactsId}, #{createBy}, #{createTime}, #{editBy}, #{editTime}, #{description}, #{contactSummary}, #{nextContactTime}, #{percent})
+    </insert>
+    
+    <update id="updateTranById">
+        update tbl_tran set owner = #{owner}, money = #{money}, name = #{name}, expectedDate = #{expectedDate}, customerId = #{customerId}, stage = #{stage},
+        type = #{type}, percent = #{percent}, source = #{source}, activityId = #{activityId}, contactsId = #{contactsId}, editBy = #{editBy},
+        editTime = #{editTime}, description = #{description}, contactSummary = #{contactSummary}, nextContactTime = #{nextContactTime} where id = #{id}
+    </update>
+    
+    <select id="queryAllTran" resultType="com.hugh.crm.pojo.Tran">
+        select t.id, t.name, tc.fullname as contactsId, c.name as customerId, t.type, t.stage, t.owner, t.source from tbl_tran t
+    join tbl_contacts tc on t.contactsId = tc.id join tbl_customer c on t.customerId = c.id
+    </select>
+
+    <select id="queryTranById" resultType="com.hugh.crm.pojo.Tran">
+        select * from tbl_tran
+    </select>
+    
+    <select id="getBoundTranById" resultType="com.hugh.crm.pojo.Tran">
+        select t.id, t.name, t.money, t.stage, t.percent, t.expectedDate, t.type, c.name as customerId from tbl_tran t join tbl_customer c on c.id = t.customerId where t.id in (select tranId from tbl_customer_tran_relation where customerId = #{id})
+    </select>
+
+    <select id="getTranById" resultType="com.hugh.crm.pojo.Tran">
+        select t.id, t.owner, t.money, t.name, t.expectedDate, cu.name as customerId, t.stage, t.type, t.source, a.name as activityId, co.fullname as contactsId, t.createBy, t.createTime, t.editBy, t.editTime, t.description, t.contactSummary, t.nextContactTime, t.percent
+        from tbl_tran t join tbl_customer cu on t.customerId = cu.id join tbl_contacts co on co.id = t.contactsId join tbl_activity a on t.activityId = a.id where t.id = #{id}
+    </select>
+
+    <!--内连接/外连接-->
+    <select id="getTranEditById" resultType="com.hugh.crm.pojo.TranEdit">
+        select t.id, t.owner, t.money, t.name, t.expectedDate, t.customerId ,cu.name as customerName, t.stage, t.type, t.source, t.activityId, a.name as activityName, t.contactsId, co.fullname as contactsName, t.createBy, t.createTime, t.editBy, t.editTime, t.description, t.contactSummary, t.nextContactTime, t.percent
+        from tbl_tran t left join tbl_customer cu on t.customerId = cu.id left join tbl_contacts co on co.id = t.contactsId join tbl_activity a on t.activityId = a.id where t.id = #{id}
+    </select>
+
+</mapper>

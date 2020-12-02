@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hugh.crm.dao.ContactsDao">
+    
+    <insert id="saveContactsActivity">
+        insert into tbl_contacts_activity_relation (id, contactsId, activityId) values (#{id}, #{contactsId}, #{activityId})
+    </insert>
+	
+    <insert id="saveContact">
+        insert into tbl_contacts (id,owner,source,customerId,fullname,appellation,email,mphone,job,birth,createBy,createTime,editBy,editTime,description,contactSummary,nextContactTime,address) values (#{id},#{owner},#{source},#{customerId},#{fullname},#{appellation},#{email},#{mphone},#{job},#{birth},#{createBy},#{createTime},#{editBy},#{editTime},#{description},#{contactSummary},#{nextContactTime},#{address});
+    </insert>
+
+    <select id="queryAllContacts" resultType="com.hugh.crm.pojo.Contacts">
+        select co.id, co.owner, co.source, co.fullname, cu.name as customerId, co.birth from tbl_contacts co join tbl_customer cu on cu.id = co.customerId
+    </select>
+
+    <select id="getContactsById" resultType="com.hugh.crm.pojo.Contacts">
+        select co.id, co.owner, co.source, cu.name as customerId, co.fullname, co.appellation, co.email, co.mphone, co.job, co.birth, co.createBy, co.createTime, co.editBy, co.editTime, co.description, co.contactSummary, co.nextContactTime, co.address
+         from tbl_contacts co join tbl_customer cu on cu.id = co.customerId where co.id = #{id}
+    </select>
+
+    <select id="getBoundContactsById" resultType="com.hugh.crm.pojo.Contacts">
+        select id, fullname, email, mphone from tbl_contacts where customerId = #{id}
+    </select>
+    
+    <select id="getAllContacts" resultType="com.hugh.crm.pojo.Contacts">
+        select * from tbl_contacts;
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

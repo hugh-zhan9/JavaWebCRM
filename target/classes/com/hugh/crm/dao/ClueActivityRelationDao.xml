@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hugh.crm.dao.ClueActivityRelationDao">
+    <select id="getActivityByClueId" resultType="com.hugh.crm.pojo.Activity">
+        select r.id, ac.owner, ac.name, ac.startDate, ac.endDate, ac.cost, ac.description, ac.createTime, ac.createBy, ac.editTime, ac.editBy
+        from tbl_clue_activity_relation r join (select a.id, u.name as owner, a.name, a.startDate, a.endDate, a.cost, a.description, a.createTime, a.createBy, a.editTime, a.editBy
+from tbl_activity a join tbl_user u on a.owner=u.id) ac
+        on r.activityId = ac.id
+        where r.clueId = #{clueId}
+    </select>
+    
+    <delete id="deleteClueActivityById">
+        delete from tbl_clue_activity_relation where id = #{id}
+    </delete>
+
+    <insert id="saveClueActivity">
+        insert into tbl_clue_activity_relation values (#{id}, #{clueId}, #{activityId})
+    </insert>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

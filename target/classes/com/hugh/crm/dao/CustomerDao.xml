@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hugh.crm.dao.CustomerDao">
+    
+    <insert id="saveCustomer">
+        insert into tbl_customer (id,owner,name,website,phone,createBy,createTime,editBy,editTime,contactSummary,nextContactTime,description,address) values (#{id},#{owner},#{name},#{website},#{phone},#{createBy},#{createTime},#{editBy},#{editTime},#{contactSummary},#{nextContactTime},#{description},#{address});
+    </insert>
+    
+    <select id="queryAllCustomer" resultType="com.hugh.crm.pojo.Customer">
+        select * from tbl_customer
+    </select>
+
+    <select id="queryCustomerById" resultType="com.hugh.crm.pojo.Customer">
+        select * from tbl_customer where id = #{id}
+    </select>
+    
+    <select id="queryCustomerByName" resultType="com.hugh.crm.pojo.Customer">
+        select id, name from tbl_customer where name = #{name}
+    </select>
+    
+    <select id="getCustomerByContent" resultType="com.hugh.crm.pojo.Customer">
+        select name  from tbl_customer where name like '%' #{name} '%'
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
